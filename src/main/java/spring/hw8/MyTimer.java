@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@Timer(level = Level.INFO)
 public class MyTimer {
     public void start(int maxTime){
         System.out.println("Timer starter");
