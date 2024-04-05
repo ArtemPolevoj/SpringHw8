@@ -7,7 +7,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class TimerAspect {
-    @Around("execution(* spring.hw8.MyTimer.*(..))")
+
+    @Pointcut("within(@spring.hw8.Timer *)")
+    public void beansMethod(){}
+
+    @Pointcut("@annotation(spring.hw8.Timer)")
+    public void beansWithAnnotation(){}
+
+    @Around("beansMethod() || beansWithAnnotation()")
     public Object measureMethodExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         Object result = joinPoint.proceed();
